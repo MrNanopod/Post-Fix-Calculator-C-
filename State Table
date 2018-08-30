@@ -1,0 +1,54 @@
+/****************************************************************************
+* Exercise 2.2: Program 7 State Table
+*
+* Programmer: Jelani Fraser
+*
+* Due Date: 12/7/16
+*
+* EGRE 246 Fall 2016
+*
+***************************************************************************/
+S0: Initial state, top of stack = 0, size = 1
+S1: top of stack = 0, size > 1
+S2: top of stack = num, size > 1
+S3: top of stack = num, size = 1
+S4: exit state
+
+
+  Present State	|	  Input		|	Next State	|	Present Output
+		S0		|	+,-,/,*		|		S0		|	empty stack
+		S0		|	=			|		S0		|	top of stack (0)
+		S0		|	0			|		S1		|	0
+		S0		|	num			|		S2		|	num
+		S0		|	char/..		|		S0		|	syntax error
+		S0		|	c/C			|		S0		|	cleared answer
+		S0		|	x/X			|		S4		|	Goodbye!
+				|				|				|	
+		S1		|	+,-,*		|		S1		|	answer (0)
+		S1		|	+,-,*		|		S2		|	answer (num)
+		S1		|	+,-,*		|		S3		|	answer (num)
+		S1		|	/			|		S1		|	divide by zero
+		S1		|	=			|		S1		|	top of stack (0)
+		S1		|	0			|		S1		|	0
+		S1		|	num			|		S2		|	num
+		S1		|	char/..		|		S1		|	syntax error
+		S1		|	c/C			|		S0		|	cleared answer
+		S1		|	x/X			|		S4		|	Goodbye!	
+				|				|				|	
+		S2		|	+,-,/,* 	|		S1		|	answer (0)
+		S2		|	+,-,/,*		|		S2		|	answer (num)
+		S2		|	+,-,/,*		|		S3		|	answer (num)
+		S2		|	=			|		S2		|	top of stack (num)
+		S2		|	0			|		S1		|	0
+		S2		|	num			|		S2		|	num
+		S2		|	char/..		|		S2		|	syntax error
+		S2		|	c/C			|		S0		|	cleared answer
+		S2		|	x/X			|		S4		|	Goodbye!
+				|				|				|	
+		S3		|	+,-,/,*		|		S3		|	not enough answers on stack
+		S3		|	=			|		S3		|	top of stack (num)
+		S3		|	0			|		S1		|	0
+		S3		|	num			|		S2		|	num
+		S3		|	char/..		|		S3		|	syntax error
+		S3		|	c/C			|		S0		|	cleared answer
+		S3		|	x/X			|		S4		|	Goodbye!
